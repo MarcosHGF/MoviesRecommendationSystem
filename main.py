@@ -128,12 +128,13 @@ def precision_at_k(real_ratings, predicted_ratings, k):
 def home():
     recommended_movies = []
     precision_value = None
+
+    # Get max users
+    num_users = (ratings['userId'].max()) - 1
+    
     if request.method == 'POST':
         # Get the userId from the form
         user_id = int(request.form['user_id'])
-
-        # Get max users
-        num_users = (ratings['userId'].max()) - 1
         
         # Generate recommendations for the user
         recommended_movie_ids = hybrid_recommendation(user_id, user_genre_preferences, movies, predictions, k=5)
